@@ -6,7 +6,7 @@
     body {
       background-color: black;
     }
-    #center {
+    .center {
       position: absolute; 
       left: 50%; 
       top: 50%; 
@@ -24,11 +24,18 @@
   </style>
 </head>
 <body>
-  <div id='center'>
+  <div class='center'>
     <input placeholder='Your string here, please' id='phrase'>
     <div style='display: block; margin-top: 5px;'>
       <button onclick='encode(document.getElementById("phrase").value)'>Encode</button>
       <button onclick='decode(document.getElementById("phrase").value)'>Decode</button>
+    </div>
+  </div>
+  <div id='login'>
+    <div id='overlay' style='position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background-color: black;'></div>
+    <div class='center'>
+      <input placeholder="Password" id='password'>
+      <button onclick='submit()'>Submit</button>
     </div>
   </div>
   <script>
@@ -76,6 +83,13 @@
         output += String.fromCharCode(parseInt(ascii, 2))
       }
       alert(output)
+    }
+    function submit() {
+      if (document.getElementById('password').value === '321ytrewq') {
+        document.getElementById('login').style.display = 'none'
+      } else {
+        window.open('https://artemdev52.github.io/mywebsite/index.html')
+      }
     }
   </script>
 </body>
