@@ -1,0 +1,82 @@
+<html>
+<head>
+  <title>about:blank</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body {
+      background-color: black;
+    }
+    #center {
+      position: absolute; 
+      left: 50%; 
+      top: 50%; 
+      transform: translate(-50%, -50%);
+      border: 2px solid #0aff0a;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    button, input {
+      color: #0aff0a;
+      background-color: black;
+      border: 2px solid #0aff0a;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id='center'>
+    <input placeholder='Your string here, please' id='phrase'>
+    <div style='display: block;'>
+      <button onclick='encode(document.getElementById("phrase").value)'>Encode</button>
+      <button onclick='decode(document.getElementById("phrase").value)'>Decode</button>
+    </div
+  </div>
+  <script>
+    function encode(text) { //alt shift 8 = {\}
+      let ascii2 = []
+      for (let char of text) {
+        let char10 = char.charCodeAt(0)
+        ascii2.push(char10.toString(2).padStart(8, '0'))
+      }
+      let output2 = []
+      for (let i = 0; i < 8; i++) {
+        let newItem = ''
+        for (let item of ascii2) {
+          newItem += item[i]
+        }
+        output2.push(newItem)
+      }
+      let output = ''
+      for (let code of output2) {
+        output += parseInt(code, 2) + ' '
+      }
+      alert(output.trim())
+    }
+    function decode(cypher) {
+      cypher = '[' + cypher.trim().replaceAll(' ', ', ') + ']';
+      cypher = eval(cypher);
+      let maxLength = 1;
+      cypher = cypher.map(item => item.toString(2));
+      for (let item of cypher) {
+        if (item.length > maxLength) {
+          maxLength = item.length;
+        }
+      }
+      cypher = cypher.map(item => item.padStart(maxLength, '0'));
+      let outputA = []
+      for (let i = 0; i < maxLength; i++) {
+        let newItem = ''
+        for (let item of cypher) {
+          newItem += item[i]
+        }
+        outputA.push(newItem)
+      }
+      let output = ''
+      for (let ascii of outputA) {
+        output += String.fromCharCode(parseInt(ascii, 2))
+      }
+      alert(output)
+    }
+  </script>
+</body>
+</html>
