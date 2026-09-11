@@ -5,6 +5,7 @@
   <style>
     body {
       background-color: black;
+      color: #0aff0a;
     }
     .center {
       position: absolute; 
@@ -25,10 +26,16 @@
 </head>
 <body>
   <div class='center'>
-    <input placeholder='Your string here, please' id='phrase'>
-    <div style='display: block; margin-top: 5px;'>
-      <button onclick='encode(document.getElementById("phrase").value)'>Encode</button>
-      <button onclick='decode(document.getElementById("phrase").value)'>Decode</button>
+    <div>
+      <input placeholder='Your string here, please' id='phrase'>
+      <div style='display: block; margin-top: 5px;'>
+        <button onclick='encode(document.getElementById("phrase").value)'>Encode</button>
+        <button onclick='decode(document.getElementById("phrase").value)'>Decode</button>
+      </div>
+    </div>
+    <div style='margin-top: 5px; border: 2px solid #0aff0a; border-radius: 10px; padding: 10px;'>
+      <h2>Output:</h2>
+      <p id='output'></p>
     </div>
   </div>
   <div id='login'>
@@ -57,7 +64,7 @@
       for (let code of output2) {
         output += parseInt(code, 2) + ' '
       }
-      alert(output.trim())
+      document.getElementById('output').textContent = output.trim()
     }
     function decode(cypher) {
       cypher = '[' + cypher.trim().replaceAll(' ', ', ') + ']';
@@ -82,13 +89,13 @@
       for (let ascii of outputA) {
         output += String.fromCharCode(parseInt(ascii, 2))
       }
-      alert(output)
+      document.getElementById('output').textContent = output
     }
     function submit() {
       if (document.getElementById('password').value === '321ytrewq') {
         document.getElementById('login').style.display = 'none'
       } else {
-        window.open('https://artemdev52.github.io/mywebsite/index.html')
+        window.open('https://artemdev52.github.io/mywebsite/index.html', '_self')
       }
     }
   </script>
